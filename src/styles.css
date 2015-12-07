@@ -1,0 +1,14 @@
+body {
+    padding: 2em;
+}
+
+#wrap-counter{
+    width:200px;
+    padding:1em;
+    background-color: whitesmoke;
+    border:solid 3px #f0ad4e;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    text-align: center;
+}
