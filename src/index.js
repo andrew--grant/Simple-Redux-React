@@ -4,15 +4,25 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import Counter from './components/counter';
 
+const initialState = {
+    count: 0,
+    name: '',
+    step: 1
+}
+
 // A simple reducer (a pure function)
-const counterReducer = (state = 0, action) => {
-    console.log(state);
-    console.log(action);
+const counterReducer = (state = initialState, action) => {
+    // specify how the application’s state
+    // changes in response to an action
     switch (action.type) {
         case 'INCREMENT':
-            return state + 1;
+            return Object.assign({}, state, {
+                count: state.count + state.step
+            });
         case 'DECREMENT':
-            return state - 1;
+            return Object.assign({}, state, {
+                count: state.count > 0 ? state.count - state.step : 0
+            });
         default:
             return state;
     }
@@ -34,4 +44,3 @@ const render = () => {
 }
 
 render();
-

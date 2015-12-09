@@ -8,7 +8,7 @@ class Counter extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props.value);
+        console.log(props);
     }
 
     increment() {
@@ -24,8 +24,8 @@ class Counter extends Component {
     render() {
         return (
             <div id='wrap-counter'>
-                <h1 id='count'></h1>
-                <h3>{this.props.count || 0}</h3>
+                <h1 id='count'>{this.props.counter.name}</h1>
+                <h3>{this.props.counter.count}</h3>
                 <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
                 <button className="btn btn-warning" onClick={this.increment.bind(this)}>Increment</button>
             </div>
@@ -36,11 +36,11 @@ class Counter extends Component {
 
 //************************ Redux Wiring *********************/
 
-// Which part of the Redux global state does our component
-// want to receive as props?
+// Which part of the Redux global state does
+// our component want to receive as props?
 function mapStateToProps(state) {
     return {
-        count: state
+        counter: state
     }
 }
 
