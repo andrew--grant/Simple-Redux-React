@@ -1,28 +1,57 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { doIncrement } from '../actionCreators'
+import { doDecrement } from '../actionCreators'
 
-export default class Counter extends Component {
+
+class Counter extends Component {
 
     constructor(props) {
         super(props);
-        // Operations usually carried out
-        // in componentWillMount go here
-        this.state = {count: 0}
     }
 
-    handleClick() {
-        // can get rid of bind by using fat arrows - need
-        // to enable within babel??
-        this.setState({count: this.state.count + 1});
+    increment() {
+        this.props.onIncrement();
+    }
+
+    decrement() {
+        this.props.onDecrement();
     }
 
     render() {
+
+        console.log(this.props);
         return (
             <div id='wrap-counter'>
-                <h1 id='count'>{this.state.count}</h1>
-                <h3>{this.props.counterName}</h3>
-                <button className="btn btn-warning" onClick={this.handleClick.bind(this)}>Increment</button>
+                <h1 id='count'></h1>
+                <h3></h3>
+                <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
+                <button className="btn btn-warning" onClick={this.increment.bind(this)}>Increment</button>
             </div>
         );
     }
 
 }
+
+//************************ Redux Wiring *********************/
+
+// Which part of the Redux global state does our component
+// want to receive as props?
+function mapStateToProps(state) {
+    return {
+        value: state
+    }
+}
+
+// Which action creators does it want to receive by props?
+function mapDispatchToProps(dispatch) {
+    return {
+        onIncrement: () => dispatch(doIncrement()),
+        onDecrement: () => dispatch(doDecrement())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Counter)
