@@ -16,6 +16,7 @@ const counterReducer = (state = initialState, action) => {
     // changes in response to an action
     switch (action.type) {
         case 'INCREMENT':
+            console.log('debug: ' + 'inc');
             return Object.assign({}, state, {
                 count: state.count + state.step
             });
@@ -32,13 +33,19 @@ const counterReducer = (state = initialState, action) => {
 const {createStore } = Redux;
 
 // Create a store, passing it the reducer
-const store = createStore(counterReducer);
+const store1 = createStore(counterReducer);
+const store2 = createStore(counterReducer);
 
 const render = () => {
     ReactDOM.render(
-        <Provider store={store}>
-            <Counter></Counter>
-        </Provider>,
+        <div>
+            <Provider store={store1}>
+                <Counter></Counter>
+            </Provider>
+            <Provider store={store2}>
+                <Counter></Counter>
+            </Provider>
+            </div>,
         document.getElementById('root')
     )
 }

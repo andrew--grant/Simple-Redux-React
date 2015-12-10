@@ -25,7 +25,7 @@ class Counter extends Component {
     render() {
         return (
             <div id='wrap-counter'>
-                <CounterName value="Catie"/>
+                <CounterName value="Counter"/>
                 <h1 id='count'>{this.props.counter.count}</h1>
                 <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
                 <button className="btn btn-warning" onClick={this.increment.bind(this)}>Increment</button>
