@@ -6,7 +6,7 @@ import Counter from './components/counter';
 
 const initialState = {
     count: 0,
-    name: '',
+    name: 'Counter',
     step: 1
 }
 

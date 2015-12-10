@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { doIncrement } from '../actionCreators'
 import { doDecrement } from '../actionCreators'
+import CounterName from './counterName'
 
 
 class Counter extends Component {
@@ -24,14 +25,13 @@ class Counter extends Component {
     render() {
         return (
             <div id='wrap-counter'>
-                <h1 id='count'>{this.props.counter.name}</h1>
-                <h3>{this.props.counter.count}</h3>
+                <CounterName value="Catie"/>
+                <h1 id='count'>{this.props.counter.count}</h1>
                 <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
                 <button className="btn btn-warning" onClick={this.increment.bind(this)}>Increment</button>
             </div>
         );
     }
-
 }
 
 //************************ Redux Wiring *********************/
