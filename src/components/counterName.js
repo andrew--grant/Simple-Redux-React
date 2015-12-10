@@ -29,11 +29,21 @@ export default class CounterName extends Component {
     handleEnterNameComplete(e) {
 
         const doUpdateState = () => {
+            let val = ReactDOM.findDOMNode(this.refs['counterNameInput']).value;
+            val = val.replace(/^\s+|\s+$/g, '');
+            if (val.length == 0) {
+                // no input, stick with original name
+                val = this.state.value
+            }
+
             this.setState({
                 enteringName: !this.state.enteringName,
                 displayingCounterNameInput: false,
-                value: ReactDOM.findDOMNode(this.refs['counterNameInput']).value
+                value: val
             });
+            // make sure we don't have spaces
+            // from previous discarded input
+            ReactDOM.findDOMNode(this.refs['counterNameInput']).value = '';
         }
 
         if (e.which) {
