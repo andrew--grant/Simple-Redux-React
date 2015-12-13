@@ -9,8 +9,7 @@ export default class CounterSettings extends Component {
     }
 
 
-    handleSettings(e) {
-
+    handleSettings() {
         console.log("handleSettings");
 
     }
