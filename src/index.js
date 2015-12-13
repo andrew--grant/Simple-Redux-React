@@ -11,18 +11,19 @@ const initialState = {
 }
 
 // A simple reducer (a pure function)
-const counterReducer = (state = initialState, action) => {
+const counterReducer = (state = initialState, action = null) => {
     // specify how the application’s state
     // changes in response to an action
     switch (action.type) {
         case 'INCREMENT':
-            console.log('debug: ' + 'inc');
             return Object.assign({}, state, {
-                count: state.count + state.step
+                step: parseFloat(action.value),
+                count: state.count + parseFloat(action.value)
             });
         case 'DECREMENT':
             return Object.assign({}, state, {
-                count: state.count > 0 ? state.count - state.step : 0
+                step: parseFloat(action.value),
+                count: state.count > 0 ? state.count - parseFloat(action.value)  : 0
             });
         default:
             return state;
@@ -40,12 +41,12 @@ const render = () => {
     ReactDOM.render(
         <div>
             <Provider store={store1}>
-                <Counter></Counter>
+                <Counter step="1"></Counter>
             </Provider>
             <Provider store={store2}>
-                <Counter></Counter>
+                <Counter step="0.5"></Counter>
             </Provider>
-            </div>,
+        </div>,
         document.getElementById('root')
     )
 }
