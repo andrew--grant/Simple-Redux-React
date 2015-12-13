@@ -6,7 +6,6 @@ import CounterName from './counterName'
 import CounterSettings from './counterSettings'
 
 
-
 class Counter extends Component {
 
     constructor(props) {
