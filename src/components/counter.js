@@ -5,8 +5,7 @@ import { doDecrement } from '../actionCreators'
 import CounterName from './counterName'
 import CounterSettings from './counterSettings'
 
-
-class Counter extends Component {
+export default class Counter extends Component {
 
     constructor(props) {
         super(props);
@@ -14,13 +13,13 @@ class Counter extends Component {
 
     increment() {
         // call action creator
-        this.props.onIncrement(this.props.step);
+        console.log(this.props.index);
+        this.props.onIncrement(this.props.index, this.props.step);
     }
 
     decrement() {
         // call action creator
-        this.props.onDecrement(this.props.step);
-
+        this.props.onDecrement(this.props.index, this.props.step);
     }
 
     render() {
@@ -36,25 +35,27 @@ class Counter extends Component {
     }
 }
 
-//************************ Redux Wiring *********************/
+//******************** Redux Wiring for this component ******************/
 
-// Which part of the Redux global state does
-// our component want to receive as props?
+// Which part of the Redux global state does our component want to receive as props?
 function mapStateToProps(state) {
     return {
-        counter: state
+        counter: state[0]
     }
 }
 
 // Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
     return {
-        onIncrement: (value) => dispatch(doIncrement(value)),
-        onDecrement: (value) => dispatch(doDecrement(value))
+        onIncrement: (index, value) => dispatch(doIncrement(index, value)),
+        onDecrement: (index, value) => dispatch(doDecrement(index, value))
     }
 }
 
+// Wire it up!
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Counter)
+
+//***********************************************************************/

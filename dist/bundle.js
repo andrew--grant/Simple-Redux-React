@@ -63,51 +63,13 @@
 
 	var _reactRedux = __webpack_require__(160);
 
-	var _counter = __webpack_require__(178);
+	var _counters = __webpack_require__(178);
 
-	var _counter2 = _interopRequireDefault(_counter);
+	var _counters2 = _interopRequireDefault(_counters);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	+__webpack_require__(182);
-
-	var initialState = {
-	    count: 0,
-	    name: 'Counter',
-	    step: 1
-	};
-
-	// A simple reducer (a pure function)
-	var counterReducer = function counterReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
-	    var action = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-
-	    // specify how the application’s state
-	    // changes in response to an action
-	    switch (action.type) {
-	        case 'INCREMENT':
-	            return Object.assign({}, state, {
-	                step: parseFloat(action.value),
-	                count: state.count + parseFloat(action.value)
-	            });
-	        case 'DECREMENT':
-	            return Object.assign({}, state, {
-	                step: parseFloat(action.value),
-	                count: state.count > 0 ? state.count - parseFloat(action.value) : 0
-	            });
-	        default:
-	            return state;
-	    }
-	};
-
-	// Redux
-	var _Redux = Redux;
-	var createStore = _Redux.createStore;
-
-	// Create a store, passing it the reducer
-
-	var store1 = createStore(counterReducer);
-	var store2 = createStore(counterReducer);
+	+__webpack_require__(183);
 
 	var render = function render() {
 	    _reactDom2.default.render(_react2.default.createElement(
@@ -115,13 +77,8 @@
 	        null,
 	        _react2.default.createElement(
 	            _reactRedux.Provider,
-	            { store: store1 },
-	            _react2.default.createElement(_counter2.default, { step: '1' })
-	        ),
-	        _react2.default.createElement(
-	            _reactRedux.Provider,
-	            { store: store2 },
-	            _react2.default.createElement(_counter2.default, { step: '0.5' })
+	            null,
+	            _react2.default.createElement(_counters2.default, null)
 	        )
 	    ), document.getElementById('root'));
 	};
@@ -20886,11 +20843,122 @@
 
 	var _actionCreators = __webpack_require__(179);
 
-	var _counterName = __webpack_require__(180);
+	var _counter = __webpack_require__(180);
+
+	var _counter2 = _interopRequireDefault(_counter);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var initialState = {
+	    count: 0,
+	    name: 'Counter',
+	    step: 1
+	};
+
+	// A simple reducer (a pure function)
+	var counterReducer = function counterReducer() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var action = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
+	    // specify how the application’s state
+	    // changes in response to an action
+	    switch (action.type) {
+	        case 'INCREMENT':
+	            return Object.assign({}, state, {
+	                step: parseFloat(action.value),
+	                count: state.count + parseFloat(action.value)
+	            });
+	        case 'DECREMENT':
+	            return Object.assign({}, state, {
+	                step: parseFloat(action.value),
+	                count: state.count > 0 ? state.count - parseFloat(action.value) : 0
+	            });
+	        default:
+	            return state;
+	    }
+	};
+
+	// Redux
+	var _Redux = Redux;
+	var createStore = _Redux.createStore;
+
+	var store = createStore(counterReducer);
+
+	var Counters = (function (_Component) {
+	    _inherits(Counters, _Component);
+
+	    function Counters(props) {
+	        _classCallCheck(this, Counters);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Counters).call(this, props));
+	    }
+
+	    _createClass(Counters, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _reactRedux.Provider,
+	                { store: store },
+	                _react2.default.createElement(_counter2.default, { step: '1' })
+	            );
+	        }
+	    }]);
+
+	    return Counters;
+	})(_react.Component);
+
+	exports.default = Counters;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.doIncrement = doIncrement;
+	exports.doDecrement = doDecrement;
+	function doIncrement(value) {
+	    return { type: 'INCREMENT', value: value };
+	}
+
+	function doDecrement(value) {
+	    return { type: 'DECREMENT', value: value };
+	}
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(160);
+
+	var _actionCreators = __webpack_require__(179);
+
+	var _counterName = __webpack_require__(181);
 
 	var _counterName2 = _interopRequireDefault(_counterName);
 
-	var _counterSettings = __webpack_require__(181);
+	var _counterSettings = __webpack_require__(182);
 
 	var _counterSettings2 = _interopRequireDefault(_counterSettings);
 
@@ -20953,52 +21021,10 @@
 	    return Counter;
 	})(_react.Component);
 
-	//************************ Redux Wiring *********************/
-
-	// Which part of the Redux global state does
-	// our component want to receive as props?
-
-	function mapStateToProps(state) {
-	    return {
-	        counter: state
-	    };
-	}
-
-	// Which action creators does it want to receive by props?
-	function mapDispatchToProps(dispatch) {
-	    return {
-	        onIncrement: function onIncrement(value) {
-	            return dispatch((0, _actionCreators.doIncrement)(value));
-	        },
-	        onDecrement: function onDecrement(value) {
-	            return dispatch((0, _actionCreators.doDecrement)(value));
-	        }
-	    };
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Counter);
+	exports.default = Counter;
 
 /***/ },
-/* 179 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.doIncrement = doIncrement;
-	exports.doDecrement = doDecrement;
-	function doIncrement(value) {
-	    return { type: 'INCREMENT', value: value };
-	}
-
-	function doDecrement(value) {
-	    return { type: 'DECREMENT', value: value };
-	}
-
-/***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21120,7 +21146,7 @@
 	exports.default = CounterName;
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21159,8 +21185,7 @@
 
 	    _createClass(CounterSettings, [{
 	        key: 'handleSettings',
-	        value: function handleSettings(e) {
-
+	        value: function handleSettings() {
 	            console.log("handleSettings");
 	        }
 	    }, {
@@ -21184,16 +21209,16 @@
 	exports.default = CounterSettings;
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(183);
+	var content = __webpack_require__(184);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(185)(content, {});
+	var update = __webpack_require__(186)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21210,21 +21235,21 @@
 	}
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(184)();
+	exports = module.exports = __webpack_require__(185)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "body {\n    padding: 2em;\n}\n\n#wrap-counter {\n    width: 200px;\n    padding: 1em;\n    background-color: whitesmoke;\n    border: solid 3px #f0ad4e;\n    -webkit-border-radius: 4px;\n    -moz-border-radius: 4px;\n    border-radius: 4px;\n    text-align: center;\n    float:left;\n    margin:1em;\n}\n\ninput {\n    width: 100%;\n}", ""]);
+	exports.push([module.id, "body {\r\n    padding: 2em;\r\n}\r\n\r\n#wrap-counter {\r\n    width: 200px;\r\n    padding: 1em;\r\n    background-color: whitesmoke;\r\n    border: solid 3px #f0ad4e;\r\n    -webkit-border-radius: 4px;\r\n    -moz-border-radius: 4px;\r\n    border-radius: 4px;\r\n    text-align: center;\r\n    float:left;\r\n    margin:1em;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports) {
 
 	/*
@@ -21280,7 +21305,7 @@
 
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
