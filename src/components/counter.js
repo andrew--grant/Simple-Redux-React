@@ -13,13 +13,12 @@ export default class Counter extends Component {
 
     increment() {
         // call action creator
-        console.log(this.props.index);
-        this.props.onIncrement(this.props.index, this.props.step);
+        this.props.onIncrement(this.props.position, this.props.step);
     }
 
     decrement() {
         // call action creator
-        this.props.onDecrement(this.props.index, this.props.step);
+        this.props.onDecrement(this.props.position, this.props.step);
     }
 
     render() {
@@ -27,7 +26,7 @@ export default class Counter extends Component {
             <div id='wrap-counter'>
                 <CounterSettings/>
                 <CounterName value="Counter"/>
-                <h1 id='count'>{this.props.counter.count}</h1>
+                <h1 id='count'>{this.props.counter[this.props.position].count}</h1>
                 <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
                 <button className="btn btn-warning" onClick={this.increment.bind(this)}>Increment</button>
             </div>
@@ -40,15 +39,15 @@ export default class Counter extends Component {
 // Which part of the Redux global state does our component want to receive as props?
 function mapStateToProps(state) {
     return {
-        counter: state[0]
+        counter: state
     }
 }
 
 // Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
     return {
-        onIncrement: (index, value) => dispatch(doIncrement(index, value)),
-        onDecrement: (index, value) => dispatch(doDecrement(index, value))
+        onIncrement: (position, value) => dispatch(doIncrement(position, value)),
+        onDecrement: (position, value) => dispatch(doDecrement(position, value))
     }
 }
 

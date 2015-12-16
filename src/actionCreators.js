@@ -1,7 +1,7 @@
-export function doIncrement(value) {
-    return {type: 'INCREMENT', value:value};
+export function doIncrement(position, value) {
+    return {type: 'INCREMENT', value: value, position: position};
 }
 
-export function doDecrement(value) {
-    return {type: 'DECREMENT', value: value};
+export function doDecrement(position, value) {
+    return {type: 'DECREMENT', value: value, position: position};
 }
