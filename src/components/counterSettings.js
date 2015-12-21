@@ -5,18 +5,17 @@ export default class CounterSettings extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
     }
 
 
     handleSettings() {
-        console.log("handleSettings");
-
+        // dispatch an action to increase step
+        this.props.editSteps(3);
     }
 
     render() {
         return (
-            <span id='counter-name' onDoubleClick={this.handleSettings.bind(this)}>
+            <span id='counter-name' onClick={this.handleSettings.bind(this)}>
               <h1 id='count'>settings</h1>
             </span>
         );
