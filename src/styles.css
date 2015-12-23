@@ -2,9 +2,8 @@ body {
     padding: 2em;
 }
 
-#wrap-counter {
+.wrap-counter {
     width: 200px;
-    padding: 1em;
     background-color: whitesmoke;
     border: solid 3px #f0ad4e;
     -webkit-border-radius: 4px;
@@ -16,5 +15,29 @@ body {
 }
 
 input {
+    margin:auto;
+    width: 90%;
+}
+
+.step-select{
     width: 100%;
+}
+
+.step-select select{
+    margin:auto;
+    width: 50%;
+}
+
+.options{
+    width:100%;
+    padding:.5em;
+    background-color: #f0ad4e;
+}
+
+.hide{
+    display:none;
+}
+
+.show{
+    display:block;
 }

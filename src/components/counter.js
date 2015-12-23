@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { doIncrement } from '../actionCreators'
 import { doDecrement } from '../actionCreators'
 import { doEditSteps } from '../actionCreators'
+import { doReset } from '../actionCreators'
+import { doAddCounter } from '../actionCreators'
 import CounterName from './counterName'
 import CounterSettings from './counterSettings'
 
@@ -10,33 +12,44 @@ export default class Counter extends Component {
 
     constructor(props) {
         super(props);
-        // todo: not happy - want this to come direct from application state!!
-        this.state = {
-            step: this.props.step,
-            position: this.props.position
-        };
+        this.state = {visible: this.props.visible}
     }
 
     increment() {
         // call action creator
-        this.props.onIncrement(this.state.position, this.state.step);
+        this.props.onIncrement(this.props.position);
     }
 
     decrement() {
         // call action creator
-        this.props.onDecrement(this.state.position, this.state.step);
+        this.props.onDecrement(this.props.position);
     }
 
-    editSteps() {
+    reset() {
         // call action creator
-        this.setState({step: 3}); // todo: get from user input
-        this.props.onEditSteps(this.state.position, this.state.step);
+        this.props.onReset(this.props.position);
+        console.log('called reset');
+    }
+
+    addCounter() {
+        // call action creator
+        this.props.onAddCounter();
+    }
+
+    editSteps(steps) {
+        // call action creator
+        this.props.onEditSteps(this.props.position, steps);
     }
 
     render() {
+        // some counters will be hidden, to be 'added' later by user
+        var showHide =  this.state.visible ? ' show' : ' hide';
+        console.log('render: ' + showHide);
         return (
-            <div id='wrap-counter'>
-                <CounterSettings editSteps={this.editSteps.bind(this)}/>
+            <div className={'wrap-counter' + showHide}>
+                <CounterSettings reset={this.reset.bind(this)}
+                                 editSteps={this.editSteps.bind(this)}
+                                 addCounter={this.addCounter.bind(this)}/>
                 <CounterName value="Counter"/>
                 <h1 id='count'>{this.props.counter[this.props.position].count}</h1>
                 <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
@@ -46,7 +59,7 @@ export default class Counter extends Component {
     }
 }
 
-//******************** Redux Wiring for this component ******************/
+//******************** Redux Wiring ******************/
 
 // Which part of the Redux global state does our component want to receive as props?
 function mapStateToProps(state) {
@@ -58,9 +71,11 @@ function mapStateToProps(state) {
 // Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
     return {
-        onIncrement: (position, value) => dispatch(doIncrement(position, value)),
-        onDecrement: (position, value) => dispatch(doDecrement(position, value)),
-        onEditSteps: (position, value) => dispatch(doEditSteps(position, value))
+        onIncrement: (position) => dispatch(doIncrement(position)),
+        onDecrement: (position) => dispatch(doDecrement(position)),
+        onEditSteps: (position, value) => dispatch(doEditSteps(position, value)),
+        onReset: (position) => dispatch(doReset(position)),
+        onAddCounter: () => dispatch(doAddCounter())
     }
 }
 
@@ -71,3 +86,4 @@ export default connect(
 )(Counter)
 
 //***********************************************************************/
+
