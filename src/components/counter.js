@@ -51,7 +51,7 @@ export default class Counter extends Component {
                                  editSteps={this.editSteps.bind(this)}
                                  addCounter={this.addCounter.bind(this)}/>
                 <CounterName value="Counter"/>
-                <h1 id='count'>{this.props.counter[this.props.position].count}</h1>
+                <h1 id='count'>{this.props.counter.counters[this.props.position].count}</h1>
                 <button className="btn btn-warning" onClick={this.decrement.bind(this)}>Decrement</button>
                 <button className="btn btn-warning" onClick={this.increment.bind(this)}>Increment</button>
             </div>
